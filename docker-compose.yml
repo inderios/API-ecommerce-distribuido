@@ -1,0 +1,30 @@
+services:
+  gateway:
+    build:
+    context: .
+    dockerfile: ./docker/gateway/Dockerfile
+    container_name: payment_gateway
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./src:/app/src
+    env_file:
+      - .env
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7.2
+    container_name: payment_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker/redis/redis.conf:/usr/local/etc/redis/redis.conf
+
+  nginx:
+    build: ./docker/nginx
+    container_name: payment_nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - gateway
