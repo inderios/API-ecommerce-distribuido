@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, Float, String, ForeignKey
 from sqlalchemy.orm import relationship
 from gateway.common.database import Base
+from gateway.models.user_model import User
 
 class Order(Base):
     __tablename__ = "orders"

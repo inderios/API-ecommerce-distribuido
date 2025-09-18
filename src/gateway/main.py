@@ -1,7 +1,15 @@
+from dotenv import load_dotenv
+from fastapi import FastAPI
+import redis
 import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 import redis
+# Importação dos routers
+from gateway.routes.auth import router as auth_router
+from gateway.routes.orders import router as orders_router
+from gateway.routes.payments import router as payments_router
+from gateway.routes.health import router as health_router
 
 # 1️⃣ Carregar variáveis do .env
 load_dotenv()
@@ -39,3 +47,7 @@ async def redis_test():
         return {"error": str(e)}
     
 # Incluir rotas de outros módulos
+app.include_router(auth_router)
+app.include_router(orders_router)
+app.include_router(payments_router)
+app.include_router(health_router)
