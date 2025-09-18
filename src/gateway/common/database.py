@@ -9,11 +9,10 @@ from .logger import logger
 # Carregar variáveis do .env
 load_dotenv()
 
-# Banco de dados (PostgreSQL por padrão)
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@localhost:5432/payments")
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://user:password@postgres:5432/payments_db")
 
-# Redis
-REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+# Redis: sempre usar o host 'redis' para containers Docker
+REDIS_URL = os.getenv("REDIS_URL", "redis://redis:6379/0")
 
 # Base do SQLAlchemy para os modelos
 Base = declarative_base()
