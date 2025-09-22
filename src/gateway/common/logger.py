@@ -11,6 +11,6 @@ logger = logging.getLogger("gateway")
 logger.setLevel(logging.INFO)
 
 # Evitar handlers duplicados
-if not logger.handlers:
+if not any(isinstance(h, logging.StreamHandler) for h in logger.handlers):
     logger.addHandler(console_handler)
     logger.propagate = False
